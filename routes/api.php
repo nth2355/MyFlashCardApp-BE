@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 
 // Public auth
 Route::post('/register', [AuthController::class, 'register']);
@@ -14,5 +15,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', fn (Request $request) => response()->json([
         'user' => $request->user(),
     ]));
+    //task
+    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::post('/tasks', [TaskController::class, 'store']);
+    Route::patch('/tasks/{id}', [TaskController::class, 'update']);
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 });
 
